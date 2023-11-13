@@ -1,0 +1,13 @@
+<h1>Chat Rooms</h1>
+
+<ul>
+  <% @chat_rooms.each do |chat_room| %>
+    <li>
+      <%= link_to chat_room.name, chat_room_path(chat_room) %>
+      <% last_message = chat_room.chats.last %>
+      <% if last_message %>
+        <p>Last message: <%= last_message.content %> by <%= last_message.user.name %></p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

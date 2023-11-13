@@ -1,0 +1,21 @@
+<%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: true) do |f| %>
+  <%= f.label :content, 'メッセージ' %>
+  <%= f.text_area :content %>
+  <%= f.submit '送信' %>
+<% end %>
+
+<%= form_with(model: [ @group, Event.new ], local: true) do |f| %>
+  <%= f.label :name, 'イベント名' %>
+  <%= f.text_field :name %>
+
+  <%= f.label :date, '日時' %>
+  <%= f.datetime_select :date %>
+
+  <%= f.label :location, '場所' %>
+  <%= f.text_field :location %>
+
+  <%= f.label :details, '詳細' %>
+  <%= f.text_area :details %>
+
+  <%= f.submit 'イベントを作成' %>
+<% end %>

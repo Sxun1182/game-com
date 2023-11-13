@@ -18,11 +18,21 @@ class PostsController < ApplicationController
       render :new
     end
   end
+  
+  def search
+    @posts = Post.where('content LIKE ?', "%#{params[:keyword]}%")
+  end
+  
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
+    redirect_to posts_path, notice: '投稿を削除しました'
+  end
 
   private
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:title, :content)
   end
   
 end

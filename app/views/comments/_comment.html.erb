@@ -1,0 +1,8 @@
+<% @comments.each do |comment| %>
+  <p>
+    <%= comment.content %>
+    <% if current_user.admin? %>
+      <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </p>
+<% end %>

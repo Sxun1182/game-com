@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   
   belongs_to :user
-  has_many :comments
-  has_many :likes
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   # acts_as_taggable_on :tags など、タグ機能を追加する場合はここに記述
   
 end

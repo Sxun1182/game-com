@@ -3,7 +3,23 @@
 <% @posts.each do |post| %>
   <div>
     <h2>タイトル: <%= post.title %></h2>
-    <p>名前: <%= post.user.name %></p>
+    <p>名前: <%= link_to post.user.name, user_path(post.user) %></p>
     <p>内容: <%= post.content %></p>
+    
+    <% if post.user == current_user || current_user.admin? %>
+      <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <% end %>
+    
+    <% if post.likes.find_by(user_id: current_user.id) %>
+      <%= link_to 'いいねを取り消す', post_likes_path(post), method: :delete %>
+    <% else %>
+      <%= link_to 'いいね', post_likes_path(post), method: :post %>
+    <% end %>
+    
+    <p>いいね数: <%= post.likes.count %></p>
+    <%= form_with(model: [post, Comment.new], local: true) do |f| %>
+      <%= f.text_area :content, placeholder: 'コメントを入力...' %>
+      <%= f.submit 'コメントする' %>
+    <% end %>
   </div>
 <% end %>

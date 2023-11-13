@@ -15,9 +15,17 @@
 
   <%= link_to "投稿する", new_post_path %>
   
+  <a href="/posts">投稿一覧</a>
+  
+  <%= link_to 'グループ一覧', groups_path %>
+  
   <% if user_signed_in? %>
     <%= link_to "プロフィール", user_path(current_user) %>
   <% end %>
+  
+  <a href="/chat_rooms">DM</a>
+  
+  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
   
 </header>
 

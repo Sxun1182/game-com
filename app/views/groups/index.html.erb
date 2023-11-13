@@ -1,0 +1,11 @@
+<% @groups.each do |group| %>
+  <div>
+    <h2><%= group.name %></h2>
+    <p><%= group.purpose %></p>
+    <% unless group.owner == current_user || current_user.groups.include?(group) %>
+      <%= button_to 'グループに参加', group_group_users_path(group), method: :post %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to 'グループを作成', new_group_path %>

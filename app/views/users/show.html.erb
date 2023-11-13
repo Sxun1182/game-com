@@ -4,4 +4,30 @@
 <p>メールアドレス: <%= @user.email %></p>
 <p>自己紹介: <%= @user.introduction %></p>
 
-<%= link_to "プロフィールを編集", edit_user_registration_path %>
+<% if @user == current_user %>
+  <%= link_to "プロフィールを編集", edit_user_registration_path %>
+<% elsif current_user.admin? %>
+  <%= link_to 'ユーザーを削除', @user, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+<% else %>
+  <%= form_with(model: [Chat.new], local: true) do |f| %>
+    <%= f.hidden_field :receiver_id, value: @user.id %>
+    <%= f.text_area :message, placeholder: 'メッセージを入力...' %>
+    <%= f.submit 'DMを送る' %>
+  <% end %>
+<% end %>
+
+<h2>「いいね」した投稿</h2>
+
+<% @liked_posts.each do |post| %>
+  <div>
+    <h3>タイトル: <%= post.title %></h3>
+    <p>内容: <%= post.content %></p>
+  </div>
+<% end %>
+
+<h2>所属しているグループ</h2>
+<ul>
+  <% @groups.each do |group| %>
+    <li><%= link_to group.name, group_path(group) %></li>
+  <% end %>
+</ul>

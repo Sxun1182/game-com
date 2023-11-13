@@ -5,9 +5,9 @@ class ChatsController < ApplicationController
   def create
     @chat = current_user.chats.build(chat_params)
     if @chat.save
-      redirect_to chats_path
+      redirect_to user_path(@chat.receiver_id), notice: 'メッセージを送信しました'
     else
-      render :new
+      redirect_to user_path(@chat.receiver_id), alert: 'メッセージの送信に失敗しました'
     end
   end
 
@@ -16,5 +16,4 @@ class ChatsController < ApplicationController
   def chat_params
     params.require(:chat).permit(:receiver_id, :message)
   end
-  
 end
