@@ -14,6 +14,11 @@ class UsersController < ApplicationController
     flash[:success] = "User deleted"
     redirect_to users_url
   end
+  
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers
+  end
 
   private
 

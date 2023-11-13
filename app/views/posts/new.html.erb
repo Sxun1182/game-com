@@ -6,6 +6,9 @@
 
   <%= f.label :content, "内容" %>
   <%= f.text_area :content %>
+  
+  <%= f.label :genre, "ジャンルの選択" %>
+  <%= f.select :genre, ['ジャンル1', 'ジャンル2', 'ジャンル3'] %>
 
   <%= f.submit "投稿" %>
 <% end %>

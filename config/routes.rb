@@ -6,12 +6,19 @@ Rails.application.routes.draw do
   }
   
   resources :users, only: [:show] do
+    member do
+      get :following, :followers
+      post 'follow', to: 'relationships#create'
+      delete 'unfollow', to: 'relationships#destroy'
+    end
     resources :posts, only: [:index]
   end
+  
   resources :posts do
     resources :comments, only: [:create]
     resource :likes, only: [:create, :destroy]
   end
+  
   resources :chats, only: [:create]
   resources :chat_rooms, only: [:index, :show]
   

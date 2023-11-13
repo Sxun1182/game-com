@@ -25,6 +25,17 @@
   </div>
 <% end %>
 
+<% unless current_user == @user %>
+  <% if current_user.following?(@user) %>
+    <%= button_to 'Unfollow', unfollow_user_path(@user), method: :delete %>
+  <% else %>
+    <%= button_to 'Follow', follow_user_path(@user) %>
+  <% end %>
+<% end %>
+
+<p>フォロー数: <%= link_to @user.following_count, following_user_path(@user) %></p>
+<p>フォロワー数: <%= link_to @user.followers_count, followers_user_path(@user) %></p>
+
 <h2>所属しているグループ</h2>
 <ul>
   <% @groups.each do |group| %>

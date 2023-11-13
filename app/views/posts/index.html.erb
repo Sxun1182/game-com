@@ -5,6 +5,7 @@
     <h2>タイトル: <%= post.title %></h2>
     <p>名前: <%= link_to post.user.name, user_path(post.user) %></p>
     <p>内容: <%= post.content %></p>
+    <p>ジャンル: <%= post.genre %></p>
     
     <% if post.user == current_user || current_user.admin? %>
       <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
