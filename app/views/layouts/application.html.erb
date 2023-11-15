@@ -7,11 +7,21 @@
     <%= f.submit "検索" %>
   <% end %>
 
-  <%= form_with url: "/tag_search", method: :get, local: true do |f| %>
-    <%= f.label :tag_name, "タグ検索" %>
-    <%= f.text_field :tag_name %>
+  <%= form_with url: tag_search_path, method: :get, local: true do |f| %>
+    <%= f.label :tags, "タグ検索" %>
+    <%= f.text_field :tags %>
     <%= f.submit "検索" %>
   <% end %>
+
+<%= form_with url: search_posts_path, method: :get, local: true do |f| %>
+  <%= f.label :genre_id, "ジャンル検索" %>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+  <%= f.submit '検索' %>
+<% end %>
+
+<% if current_user && current_user.admin? %>
+  <%= link_to 'ジャンル追加', new_admin_genre_path, class: 'btn btn-primary' %>
+<% end %>
 
   <%= link_to "投稿する", new_post_path %>
   

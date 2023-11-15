@@ -1,0 +1,15 @@
+<%= form_with(model: @post, local: true) do |f| %>
+  <%= f.label :title, 'タイトル' %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content, '内容' %>
+  <%= f.text_area :content %>
+
+  <%= f.label :genre, 'ジャンル' %>
+  <%= f.select :genre, Post.genres.keys %>
+
+  <%= f.label :tags, 'タグ（カンマ区切り）' %>
+  <%= f.text_field :tags, value: @post.tags.map(&:name).join(',') %>
+
+  <%= f.submit '更新する' %>
+<% end %>

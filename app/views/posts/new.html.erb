@@ -7,8 +7,11 @@
   <%= f.label :content, "内容" %>
   <%= f.text_area :content %>
   
-  <%= f.label :genre, "ジャンルの選択" %>
-  <%= f.select :genre, ['ジャンル1', 'ジャンル2', 'ジャンル3'] %>
+  <%= f.label :genre_ids, "ジャンルの選択" %>
+  <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name, include_hidden: false %>
+  
+  <%= f.label :tags, 'タグ（カンマ区切り）' %>
+  <%= f.text_field :tags %>
 
   <%= f.submit "投稿" %>
 <% end %>

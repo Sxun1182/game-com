@@ -1,2 +1,5 @@
 <%= form.label :genre %>
 <%= form.select :genre, ['ジャンル1', 'ジャンル2', 'ジャンル3'] %>
+
+<%= form.label :tags, "タグ" %>
+<%= form.text_field :tags, value: @post.tags.join(',') %>
