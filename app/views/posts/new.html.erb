@@ -11,7 +11,7 @@
   <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name, include_hidden: false %>
   
   <%= f.label :tags, 'タグ（カンマ区切り）' %>
-  <%= f.text_field :tags %>
+  <%= f.text_field :tags, value: "" %>
 
   <%= f.submit "投稿" %>
 <% end %>

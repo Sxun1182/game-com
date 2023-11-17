@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'home#index'
+  
   mount ActionCable.server => '/cable'
   
   devise_for :users, controllers: {
@@ -38,7 +40,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
   
-  root to: 'posts#index'
+  #root to: 'posts#index'
   
   get 'search', to: 'posts#search'
   get 'tag_search', to: 'posts#tag_search'

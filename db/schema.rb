@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_15_122329) do
+ActiveRecord::Schema.define(version: 2023_11_15_164156) do
 
   create_table "chat_rooms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2023_11_15_122329) do
     t.integer "user_id", null: false
     t.string "title"
     t.string "genre"
+    t.index "\"genre_id\"", name: "index_posts_on_genre_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

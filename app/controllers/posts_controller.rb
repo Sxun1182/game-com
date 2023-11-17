@@ -4,9 +4,9 @@ class PostsController < ApplicationController
 
   def index
     if params[:genre_id].present?
-      @posts = Post.joins(:genres).where(genres: { id: params[:genre_id] })
+      @posts = Post.joins(:genres).where(genres: { id: params[:genre_id] }).order(created_at: :desc)
     else
-      @posts = Post.all
+      @posts = Post.order(created_at: :desc)
     end
   end
 
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if post_params[:tags].present?
-      tags = post_params[:tags].map do |tag_name|
+      tags = post_params[:tags].split(',').map do |tag_name|
         Tag.find_or_create_by(name: tag_name.strip)
       end
       @post.tags = tags
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if post_params[:tags].present?
-      tags = post_params[:tags].map do |tag_name|
+      tags = post_params[:tags].split(',').map do |tag_name|
         Tag.find_or_create_by(name: tag_name.strip)
       end
       @post.tags = tags
