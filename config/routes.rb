@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   
   mount ActionCable.server => '/cable'
   
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   
   namespace :admin do
     resources :genres, only: [:index, :new, :create]

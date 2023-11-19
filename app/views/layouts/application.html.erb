@@ -1,56 +1,70 @@
 <!DOCTYPE html>
-
-<header>
-  <%= form_with url: "/search", method: :get, local: true do |f| %>
-    <%= f.label :keyword, "キーワード検索" %>
-    <%= f.text_field :keyword %>
-    <%= f.submit "検索" %>
-  <% end %>
-
-  <%= form_with url: tag_search_path, method: :get, local: true do |f| %>
-    <%= f.label :tags, "タグ検索" %>
-    <%= f.text_field :tags %>
-    <%= f.submit "検索" %>
-  <% end %>
-
-<%= form_with(url: posts_path, method: :get, local: true) do |form| %>
-  <%= form.label :genre_id, 'ジャンルで検索' %>
-  <%= form.collection_select :genre_id, Genre.all, :id, :name %>
-  <%= form.submit '検索' %>
-<% end %>
-
-<% if current_user && current_user.admin? %>
-  <%= link_to 'ジャンル追加', admin_genres_path, class: 'btn btn-primary' %>
-<% end %>
-
-  <%= link_to "投稿する", new_post_path %>
-  
-  <a href="/posts">投稿一覧</a>
-  
-  <%= link_to 'グループ一覧', groups_path %>
-  
-  <% if user_signed_in? %>
-    <%= link_to "プロフィール", user_path(current_user) %>
-  <% end %>
-  
-  <!--<a href="/chat_rooms">DM</a> -->
-  
-  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-  
-</header>
-
 <html>
   <head>
     <title>OriginalApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%= csp_meta_tag %> 
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'comments' %>
   </head>
-
-  <body>
+  <body> 
+   <% unless controller_name == 'sessions' && action_name == 'new' %>
+    <header class = "header">
+      <div class  = "container">
+        <div class = "header-left">
+          <h1><a href="/">OriginalApp</a></h1>
+          <!-- ゲームのアイコン -->
+          <i class="fas fa-gamepad"></i>
+        </div>
+        
+      <div class = "header-center">
+        <!-- 検索フォーム-->  
+        <%= form_with url: "/search", method: :get, local: true do |f| %>
+          <%= f.label :keyword, "キーワード検索" %>
+          <%= f.text_field :keyword %>
+          <%= f.submit "検索" %>
+        <% end %>
+        
+        <%= form_with url: tag_search_path, method: :get, local: true do |f| %>
+          <%= f.label :tags, "タグ検索" %>
+          <%= f.text_field :tags %>
+          <%= f.submit "検索" %>
+        <% end %>
+    
+        <%= form_with(url: posts_path, method: :get, local: true) do |form| %>
+          <%= form.label :genre_id, 'ジャンルで検索' %>
+          <%= form.collection_select :genre_id, Genre.all, :id, :name %>
+          <%= form.submit '検索' %>
+        <% end %>
+      </div>
+      
+      <div class="header-right">
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'ジャンル追加', admin_genres_path, class: 'btn btn-primary' %>
+      　<% end %>
+        
+        <nav>
+          <ul>  
+            <li><%= link_to "投稿する", new_post_path %></li>
+            <li><a href="/posts">投稿一覧</a></li>
+            <li><%= link_to 'グループ一覧', new_group_path %></li>
+            
+            <% if user_signed_in? %>
+              <li><%= link_to "プロフィール", user_path(current_user) %></li>
+            <% end %>
+  
+            <!--<a href="/chat_rooms">DM</a> -->
+  
+            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </nav>
+      </div>
+      </div>
+    </header>
+    <% end %>
     <%= yield %>
   </body>
-</html>
+</html> 

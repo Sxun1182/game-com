@@ -1,3 +1,14 @@
 <p>タグ: <% @post.tags.each do |tag| %>
   <%= tag.name %>
 <% end %></p>
+
+<div id="comments">
+  <% @post.comments.each do |comment| %>
+    <!-- コメントの表示 -->
+  <% end %>
+
+  <%= form_with(model: [ @post, @post.comments.build ], local: false) do |form| %>
+    <!-- フォームのフィールド -->
+    <%= form.submit %>
+  <% end %>
+</div>

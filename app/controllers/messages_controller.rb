@@ -1,14 +1,18 @@
 class MessagesController < ApplicationController
   def create
-  group = Group.find(params[:group_id])
-    message = group.messages.build(message_params)
-    message.user = current_user
-    if message.save
-      redirect_to group, notice: 'メッセージを送信しました'
+    @group = Group.find(params[:group_id])
+    @message = @group.messages.build(message_params)
+    @message.user = current_user  # メッセージを作成するユーザーを設定
+    if @message.save
+      respond_to do |format|
+        format.html { redirect_to @group }
+        format.js
+      end
     else
-      redirect_to group, alert: 'メッセージの送信に失敗しました'
+    # エラーハンドリング...
     end
   end
+
 
   private
 

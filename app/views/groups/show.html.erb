@@ -1,8 +1,14 @@
-<%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: true) do |f| %>
+<%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: false) do |f| %>
   <%= f.label :content, 'メッセージ' %>
   <%= f.text_area :content %>
   <%= f.submit '送信' %>
 <% end %>
+
+<div id="messages_<%= @group.id %>" class="messages">
+  <% @group.messages.each do |message| %>
+    <p><%= message.user.name %>：<%= message.content %></p>
+  <% end %>
+</div>
 
 <%= form_with(model: [ @group, Event.new ], local: true) do |f| %>
   <%= f.label :name, 'イベント名' %>

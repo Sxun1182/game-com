@@ -1,11 +1,31 @@
-<h1>新規グループ作成</h1>
+<div class="group-container">
+  <h1 class="group-title">新規グループ作成</h1>
 
-<%= form_with(model: @group, local: true) do |f| %>
-  <%= f.label :name, 'グループ名' %>
-  <%= f.text_field :name %>
+  <%= form_with(model: @group, local: true, html: { class: "group-form" }) do |f| %>
+    <div class="group-form-group">
+      <%= f.label :name, 'グループ名', class: "group-form-label" %>
+      <%= f.text_field :name, class: "group-form-control" %>
+    </div>
 
-  <%= f.label :purpose, 'グループの目的' %>
-  <%= f.text_area :purpose %>
+    <div class="group-form-group">
+      <%= f.label :purpose, 'グループの目的', class: "group-form-label" %>
+      <%= f.text_area :purpose, class: "group-form-control" %>
+    </div>
 
-  <%= f.submit 'グループを作成' %>
-<% end %>
+    <%= f.submit 'グループを作成', class: "group-submit-btn" %>
+  <% end %>
+</div>
+
+<div class="group-list">
+  <h2 class="group-list-title">グループ一覧</h2>
+
+  <% @groups.each do |group| %>
+    <div class="group-item">
+      <h3 class="group-item-title"><%= group.name %></h3>
+      <p class="group-item-purpose"><%= group.purpose %></p>
+      <% unless group.owner == current_user || current_user.groups.include?(group) %>
+        <%= button_to 'グループに参加', group_group_users_path(group), method: :post, class: "group-join-btn" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -5,11 +5,18 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
-    if @comment.save
-      redirect_to post_path(@post), notice: 'コメントを投稿しました'
-    else
-      redirect_to post_path(@post), alert: 'コメントの投稿に失敗しました'
-    end
+      if @comment.save
+        #respond_to do |format|
+          # format.html { redirect_to post_path(@post), notice: 'コメントを投稿しました' }
+          #format.js
+        #end
+        render "create.js.erb"
+      else
+        respond_to do |format|
+          format.html { redirect_to post_path(@post), alert: 'コメントの投稿に失敗しました' }
+          format.js
+        end
+      end
   end
   
   def destroy

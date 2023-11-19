@@ -13,3 +13,201 @@
  *= require_tree .
  *= require_self
  */
+
+.header {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-left, .header-center, .header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header h1 {
+  display: inline;
+}
+
+.header a {
+  color: #ecf0f1;
+  text-decoration: none;
+}
+
+.header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.login-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.login-container h2 {
+  text-align: center;
+}
+
+.login-container .field,
+.login-container .actions {
+  margin-bottom: 10px;
+}
+
+.login-container .field label,
+.login-container .actions label {
+  display: block;
+}
+
+.login-container .field input,
+.login-container .actions input {
+  width: 100%;
+  padding: 5px;
+}
+
+.login-container .actions {
+  text-align: center;
+}
+
+.posts-index {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.posts-index h2 {
+  text-align: center;
+}
+
+.posts-index .post {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.posts-index .post h3 {
+  margin-top: 0;
+}
+
+.posts-index .post p {
+  margin-bottom: 10px;
+}
+
+.profile {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.profile h2 {
+  text-align: center;
+}
+
+.profile .profile-image {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.profile p {
+  margin-bottom: 10px;
+}
+
+.profile .post {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.profile .post h4 {
+  margin-top: 0;
+}
+
+.profile .post p {
+  margin-bottom: 10px;
+}
+
+.group-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.group-title {
+  text-align: center;
+  color: #ffffff;
+  padding: 20px 0;
+}
+
+.group-form {
+  background-color: #242424;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.group-form-group {
+  margin-bottom: 20px;
+}
+
+.group-form-label {
+  color: #ffffff;
+}
+
+.group-form-control {
+  width: 80%;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.group-submit-btn {
+  background-color: #ff4081;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.group-list {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.group-list-title {
+  text-align: center;
+  color: #ffffff;
+  padding: 20px 0;
+}
+
+.group-item {
+  background-color: #242424;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.group-item-title,
+.group-item-purpose {
+  color: #ffffff;
+}
+
+.group-join-btn {
+  background-color: #ff4081;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

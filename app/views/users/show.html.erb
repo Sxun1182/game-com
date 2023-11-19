@@ -1,44 +1,50 @@
-<h1>プロフィール</h1>
+<div class="profile">
+  <h2>プロフィール</h2>
 
-<p>名前: <%= @user.name %></p>
-<p>メールアドレス: <%= @user.email %></p>
-<p>自己紹介: <%= @user.introduction %></p>
-
-<% if @user == current_user %>
-  <%= link_to "プロフィールを編集", edit_user_registration_path %>
-<% elsif current_user.admin? %>
-  <%= link_to 'ユーザーを削除', @user, method: :delete, data: { confirm: '本当に削除しますか？' } %>
-<% else %>
-  <%= form_with(model: [Chat.new], local: true) do |f| %>
-    <%= f.hidden_field :receiver_id, value: @user.id %>
-    <%= f.text_area :message, placeholder: 'メッセージを入力...' %>
-    <%= f.submit 'DMを送る' %>
+  <% if @user.image.attached? %>
+    <%= image_tag @user.image, class: "profile-image" %>
   <% end %>
-<% end %>
 
-<h2>「いいね」した投稿</h2>
+  <p>名前: <%= @user.name %></p>
+  <p>メールアドレス: <%= @user.email %></p>
+  <p>自己紹介: <%= @user.introduction %></p>
 
-<% @liked_posts.each do |post| %>
-  <div>
-    <h3>タイトル: <%= post.title %></h3>
-    <p>内容: <%= post.content %></p>
-  </div>
-<% end %>
-
-<% unless current_user == @user %>
-  <% if current_user.following?(@user) %>
-    <%= button_to 'Unfollow', unfollow_user_path(@user), method: :delete %>
+  <% if @user == current_user %>
+    <%= link_to "プロフィールを編集", edit_user_registration_path %>
+  <% elsif current_user.admin? %>
+    <%= link_to 'ユーザーを削除', @user, method: :delete, data: { confirm: '本当に削除しますか？' } %>
   <% else %>
-    <%= button_to 'Follow', follow_user_path(@user) %>
+    <%= form_with(model: [Chat.new], local: true) do |f| %>
+      <%= f.hidden_field :receiver_id, value: @user.id %>
+      <%= f.text_area :message, placeholder: 'メッセージを入力...' %>
+      <%= f.submit 'DMを送る' %>
+    <% end %>
   <% end %>
-<% end %>
 
-<p>フォロー数: <%= link_to @user.following_count, following_user_path(@user) %></p>
-<p>フォロワー数: <%= link_to @user.followers_count, followers_user_path(@user) %></p>
+  <h3>「いいね」した投稿</h3>
 
-<h2>所属しているグループ</h2>
-<ul>
-  <% @groups.each do |group| %>
-    <li><%= link_to group.name, group_path(group) %></li>
+  <% @liked_posts.each do |post| %>
+    <div class="post">
+      <h4>タイトル: <%= post.title %></h4>
+      <p>内容: <%= post.content %></p>
+    </div>
   <% end %>
-</ul>
+
+  <% unless current_user == @user %>
+    <% if current_user.following?(@user) %>
+      <%= button_to 'Unfollow', unfollow_user_path(@user), method: :delete %>
+    <% else %>
+      <%= button_to 'Follow', follow_user_path(@user) %>
+    <% end %>
+  <% end %>
+
+  <p>フォロー数: <%= link_to @user.following_count, following_user_path(@user) %></p>
+  <p>フォロワー数: <%= link_to @user.followers_count, followers_user_path(@user) %></p>
+
+  <h3>所属しているグループ</h3>
+  <ul>
+    <% @groups.each do |group| %>
+      <li><%= link_to group.name, group_path(group) %></li>
+    <% end %>
+  </ul>
+</div>

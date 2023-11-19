@@ -9,7 +9,11 @@ class PostsController < ApplicationController
       @posts = Post.order(created_at: :desc)
     end
   end
-
+  
+  def show
+    @post = Post.find(params[:id])
+  end
+  
   def new
     @post = Post.new
   end
