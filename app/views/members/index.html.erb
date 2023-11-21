@@ -1,0 +1,23 @@
+<%= button_to 'イベント', group_events_path(@group), method: :get %>
+<%= button_to 'メッセージ', group_path(@group), method: :get %>
+<%= button_to 'グループメンバー', group_members_path(@group), method: :get %>
+
+<div class="member">
+  <% if @group.owner.image.attached? %>
+    <%= image_tag @group.owner.image, alt: @group.owner.name, size: "150x150" %>
+  <% else %>
+    <p>no image</p>
+  <% end %>
+  <h3><%= @group.owner.name %> (オーナー)</h3>
+</div>
+
+<% @group_users.each do |group_user| %>
+  <div class="member">
+    <% if group_user.user.image.attached? %>
+      <%= image_tag group_user.user.image, alt: group_user.user.name, size: "150x150" %>
+    <% else %>
+      <p>no image</p>
+    <% end %>
+    <h3><%= group_user.user.name %></h3>
+  </div>
+<% end %>

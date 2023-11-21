@@ -40,7 +40,15 @@
 
   <p>フォロー数: <%= link_to @user.following_count, following_user_path(@user) %></p>
   <p>フォロワー数: <%= link_to @user.followers_count, followers_user_path(@user) %></p>
-
+  
+  <h3>作成したグループ</h3>
+  <% @user.owned_groups.each do |group| %>
+    <div>
+      <h3><%= link_to group.name, group_path(group) %></h3>
+      <p><%= group.purpose %></p>
+    </div>
+  <% end %>
+  
   <h3>所属しているグループ</h3>
   <ul>
     <% @groups.each do |group| %>

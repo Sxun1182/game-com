@@ -26,8 +26,16 @@ Rails.application.routes.draw do
        get 'genre_search'
        get 'tag_search'
       end
-    
   end
+  
+  resources :groups do
+    resources :members
+    resources :events
+    resources :group_users, only: [:create]
+    resources :messages, only: [:create]
+  end
+  
+  resources :events
   
   resources :chats, only: [:create]
   resources :chat_rooms, only: [:index, :show]

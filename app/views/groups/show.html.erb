@@ -1,27 +1,16 @@
-<%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: false) do |f| %>
-  <%= f.label :content, 'メッセージ' %>
-  <%= f.text_area :content %>
-  <%= f.submit '送信' %>
-<% end %>
+<%= button_to 'イベント', group_events_path(@group), method: :get %>
+<%= button_to 'メッセージ', group_path(@group), method: :get %>
+<%= button_to 'グループメンバー', group_members_path(@group), method: :get %>
+
 
 <div id="messages_<%= @group.id %>" class="messages">
   <% @group.messages.each do |message| %>
-    <p><%= message.user.name %>：<%= message.content %></p>
+    <p><strong><%= message.user.name %></strong>：<%= message.content %></p>
   <% end %>
 </div>
 
-<%= form_with(model: [ @group, Event.new ], local: true) do |f| %>
-  <%= f.label :name, 'イベント名' %>
-  <%= f.text_field :name %>
-
-  <%= f.label :date, '日時' %>
-  <%= f.datetime_select :date %>
-
-  <%= f.label :location, '場所' %>
-  <%= f.text_field :location %>
-
-  <%= f.label :details, '詳細' %>
-  <%= f.text_area :details %>
-
-  <%= f.submit 'イベントを作成' %>
+<%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: false, html: { class: "message-form" }) do |f| %>
+  <%= f.label :content, 'メッセージ' %>
+  <%= f.text_area :content, class: "message-textarea" %>
+  <%= f.submit '送信', class: "message-submit" %>
 <% end %>

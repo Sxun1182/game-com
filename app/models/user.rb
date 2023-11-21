@@ -14,7 +14,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :chats, foreign_key: :sender_id
-  has_many :groups, foreign_key: :owner_id
+  has_many :owned_groups, class_name: 'Group', foreign_key: :owner_id
+  #has_many :groups, foreign_key: :owner_id
   # 他の関連付けもここに追加
   
   has_many :active_relationships, class_name: "Relationship",

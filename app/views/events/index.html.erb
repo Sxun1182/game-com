@@ -1,0 +1,29 @@
+<%= button_to 'イベント', group_events_path(@group), method: :get %>
+<%= button_to 'メッセージ', group_path(@group), method: :get %>
+<%= button_to 'グループメンバー', group_members_path(@group), method: :get %>
+
+<%= form_with(model: [ @group, Event.new ], local: true, html: { class: "event-form" }) do |f| %>
+  <%= f.label :name, 'イベント名' %>
+  <%= f.text_field :name %>
+
+  <%= f.label :date, '日時' %>
+  <%= f.datetime_select :date %>
+
+  <%= f.label :location, '場所' %>
+  <%= f.text_field :location %>
+
+  <%= f.label :details, '詳細' %>
+  <%= f.text_area :details %>
+
+  <%= f.submit 'イベントを作成' %>
+<% end %>
+
+
+<% @group.events.each do |event| %>
+  <div class="event">
+    <h3><%= event.name %></h3>
+    <p>日時: <%= event.date %></p>
+    <p>場所: <%= event.location %></p>
+    <p>詳細: <%= event.details %></p>
+  </div>
+<% end %>

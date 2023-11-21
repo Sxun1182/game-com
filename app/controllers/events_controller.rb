@@ -8,6 +8,11 @@ class EventsController < ApplicationController
       redirect_to group, alert: 'イベントの作成に失敗しました'
     end
   end
+  
+  def index
+    @group = Group.find(params[:group_id])
+    @events = @group.events
+  end
 
   private
 

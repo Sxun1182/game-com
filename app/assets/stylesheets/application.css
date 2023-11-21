@@ -211,3 +211,82 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.site-header {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+  text-align: center;
+}
+
+/* メインコンテンツエリア */
+.site-main {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+/* ログインボタン */
+.site-login {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.site-login a {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* メッセージフォーム */
+.message-form {
+  background-color: #3c5062; /* フォームの背景色を少し明るくします */
+  color: #ecf0f1;
+  padding: 20px;
+  margin-top: 20px; /* 上部のマージンを20pxに設定 */
+}
+
+.message-form textarea {
+  background-color: #ffffff; /* テキストエリアの背景色を白にします */
+  color: #000000; /* テキストエリアのテキスト色を黒にします */
+  height: 100px;
+  width: 300px;
+}
+
+.message-form input[type="submit"] {
+  background-color: #27ae60; /* 送信ボタンの背景色を緑にします */
+  color: #ffffff; /* 送信ボタンのテキスト色を白にします */
+  border: none; /* 送信ボタンのボーダーを削除します */
+  padding: 10px 20px; /* 送信ボタンのパディングを追加します */
+  cursor: pointer; /* 送信ボタンのカーソルをポインターにします */
+}
+
+/* メッセージエリア */
+.messages {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.messages p {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.messages p strong {
+  font-weight: bold;
+}
+
+/* イベント作成フォーム */
+.event-form {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+}
+
