@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(version: 2023_11_20_195504) do
     t.integer "user_id", null: false
     t.string "title"
     t.string "genre"
-    t.index "\"genre_id\"", name: "index_posts_on_genre_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
