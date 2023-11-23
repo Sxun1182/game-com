@@ -1,7 +1,28 @@
+<body class="home-index">
 <div class="posts-index">
   <h2>投稿一覧</h2>
 
+<%= form_with model: @post, local: true do |f| %>
+  <%= f.label :title, "タイトル" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content, "内容" %>
+  <%= f.text_area :content %>
+  
+  <%= f.label :genre_ids, "ジャンルの選択" %>
+  <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name, include_hidden: false %>
+  
+  <%= f.label :tags, 'タグ（カンマ区切り）' %>
+  <%= f.text_field :tags, value: @post.tags.join(", ") %>
+  
+  <%= f.label :public, '公開設定' %>
+  <%= f.select :public, [['公開', true], ['非公開', false]] %>
+
+  <%= f.submit "投稿" %>
+<% end %>
+
   <% @posts.each do |post| %>
+   <% if post.public || post.user == current_user %>
     <div class="post">
       <h3><%= link_to post.title, post_path(post) %></h3>
       <p>投稿者：<%= link_to post.user.name, user_path(post.user) %></p>
@@ -17,6 +38,10 @@
         <% end %>
       </p>
       
+      <% if !post.public && post.user == current_user %>
+          <p>この投稿は非公開です。</p>
+      <% end %>
+      
       <% if post.user == current_user || current_user.admin? %>
         <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
       <% end %>
@@ -31,6 +56,9 @@
       
       <% post.comments.first(3).each do |comment| %>
         <p class="comment"><%= comment.user.name %>：<%= comment.content %></p>
+        <% if comment.user == current_user || post.user == current_user || current_user.admin? %>
+          <%= link_to 'コメントを削除', post_comment_path(post, comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        <% end %>
       <% end %>
 
       <% if post.comments.count > 3 %>
@@ -47,6 +75,11 @@
         <%= f.text_area :content, placeholder: 'コメントを入力...' %>
         <%= f.submit 'コメントする' %>
       <% end %>
+      
+      
     </div>
+    <% end %>
   <% end %>
 </div>
+
+</body>

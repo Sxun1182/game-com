@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_20_195504) do
+ActiveRecord::Schema.define(version: 2023_11_23_095317) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 2023_11_20_195504) do
     t.integer "user_id", null: false
     t.string "title"
     t.string "genre"
+    t.boolean "public", default: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

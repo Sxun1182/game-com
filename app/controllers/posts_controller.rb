@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @post = Post.new
     if params[:genre_id].present?
       @posts = Post.joins(:genres).where(genres: { id: params[:genre_id] }).order(created_at: :desc)
     else
@@ -45,7 +46,7 @@ class PostsController < ApplicationController
       end
       @post.tags = tags
     end
-    if @post.update(post_params)
+    if @post.update(post_params.except(:tags))
       redirect_to post_path(@post)
     else
       render :edit

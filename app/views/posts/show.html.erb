@@ -1,14 +1,63 @@
-<p>タグ: <% @post.tags.each do |tag| %>
-  <%= tag.name %>
-<% end %></p>
+<body class="home-index">
+<div class="posts-index">
+  <h2>投稿詳細</h2>
 
-<div id="comments">
-  <% @post.comments.each do |comment| %>
-    <!-- コメントの表示 -->
-  <% end %>
 
-  <%= form_with(model: [ @post, @post.comments.build ], local: false) do |form| %>
-    <!-- フォームのフィールド -->
-    <%= form.submit %>
-  <% end %>
+  <div class="post">
+    <h3><%= link_to @post.title, post_path(@post) %></h3>
+    <p>投稿者：<%= link_to @post.user.name, user_path(@post.user) %></p>
+    <p>内容：<%= @post.content %></p>
+    <p>ジャンル：
+      <% @post.genres.each do |genre| %>
+        <%= genre.name %>
+      <% end %>
+    </p>
+    <p>タグ：
+      <% @post.tags.each do |tag| %>
+        <%= tag.name %>
+      <% end %>
+    </p>
+    
+    <% if @post.user == current_user || current_user.admin? %>
+      <%= form_with model: @post, local: true do |f| %>
+        <%= f.label :public, '公開設定' %>
+        <%= f.select :public, [['公開', true], ['非公開', false]] %>
+        <%= f.submit "更新" %>
+      <% end %>
+      <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <% end %>
+    
+    <% if @post.user == current_user || current_user.admin? %>
+      <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <% end %>
+    
+    <% if @post.likes.find_by(user_id: current_user.id) %>
+      <%= link_to 'いいねを取り消す', post_likes_path(@post), method: :delete %>
+    <% else %>
+      <%= link_to 'いいね', post_likes_path(@post), method: :post %>
+    <% end %>
+    
+    <p>いいね数：<%= @post.likes.count %></p>
+    
+    <% @post.comments.first(3).each do |comment| %>
+      <p class="comment"><%= comment.user.name %>：<%= comment.content %></p>
+    <% end %>
+
+    <% if @post.comments.count > 3 %>
+      <div class="hidden_comments" style="display: none;">
+        <% @post.comments.drop(3).each do |comment| %>
+          <p class="comment"><%= comment.user.name %>：<%= comment.content %></p>
+        <% end %>
+      </div>
+      <button class="show_comments">その他のコメント</button>
+    <% end %>
+    
+    <div id="comments_<%= @post.id %>"></div>
+    <%= form_with(model: [@post, Comment.new], local: false) do |f| %>
+      <%= f.text_area :content, placeholder: 'コメントを入力...' %>
+      <%= f.submit 'コメントする' %>
+    <% end %>
+  </div>
 </div>
+
+</body>

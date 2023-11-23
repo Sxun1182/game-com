@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   end
   
   def show
-  @group = Group.find(params[:id])
+    @group = Group.find(params[:id])
   end
 
   def new
@@ -17,10 +17,15 @@ class GroupsController < ApplicationController
   end
 
   def create
-  @group = Group.new(group_params)
-  @group.owner = current_user
+    @group = Group.new(group_params)
+    @group.owner = current_user
   if @group.save
-    redirect_to groups_path, notice: 'グループを作成しました'
+    #ownerのgroup_userを登録
+    @group_user = GroupUser.new
+    @group_user.group_id = @group.id
+    @group_user.user_id = @group.owner_id
+    @group_user.save
+    redirect_to new_group_path, notice: 'グループを作成しました'
   else
     render :new
   end
@@ -32,6 +37,11 @@ class GroupsController < ApplicationController
   def update
   end
   
+  def destroy
+    @group.destroy
+    redirect_to new_group_path, notice: 'グループを削除しました'
+  end
+  
   private
   
   def set_group
@@ -39,7 +49,7 @@ class GroupsController < ApplicationController
   end
   
   def group_params
-  params.require(:group).permit(:name, :purpose)
+    params.require(:group).permit(:name, :purpose)
   end
   
   def check_owner

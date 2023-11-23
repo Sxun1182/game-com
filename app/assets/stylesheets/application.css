@@ -78,27 +78,48 @@
 }
 
 .posts-index {
+  background-color: #2D2D2D;
+  color: #FFFFFF;
   width: 600px;
   margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .posts-index h2 {
   text-align: center;
+  color: #FFFFFF;
 }
 
-.posts-index .post {
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.posts-index form {
+  background-color: #3C3C3C;
   padding: 20px;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
-.posts-index .post h3 {
-  margin-top: 0;
+.posts-index form label {
+  color: #FFFFFF;
 }
 
-.posts-index .post p {
+.posts-index form input[type="text"],
+.posts-index form textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  color: #000000;
   margin-bottom: 10px;
+}
+
+.posts-index form input[type="submit"] {
+  background-color: #FF4081;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .profile {
@@ -221,7 +242,7 @@
 
 /* メインコンテンツエリア */
 .site-main {
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.5);
   color: #000000;
   padding: 20px;
   margin: 20px 0;
@@ -289,4 +310,3 @@
   color: #ecf0f1;
   padding: 20px;
 }
-

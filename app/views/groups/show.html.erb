@@ -2,15 +2,15 @@
 <%= button_to 'メッセージ', group_path(@group), method: :get %>
 <%= button_to 'グループメンバー', group_members_path(@group), method: :get %>
 
-
 <div id="messages_<%= @group.id %>" class="messages">
   <% @group.messages.each do |message| %>
     <p><strong><%= message.user.name %></strong>：<%= message.content %></p>
   <% end %>
 </div>
 
-<%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: false, html: { class: "message-form" }) do |f| %>
-  <%= f.label :content, 'メッセージ' %>
-  <%= f.text_area :content, class: "message-textarea" %>
-  <%= f.submit '送信', class: "message-submit" %>
-<% end %>
+
+  <%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: false, html: { class: "message-form" }) do |f| %>
+    <%= f.label :content, 'メッセージ' %>
+    <%= f.text_area :content, class: "message-textarea" %>
+    <%= f.submit '送信', class: "message-submit" %>
+  <% end %>
