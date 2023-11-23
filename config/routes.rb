@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   
+  devise_scope :user do
+    post 'guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+  
   namespace :admin do
     resources :genres, only: [:index, :new, :create]
   end
@@ -17,6 +21,8 @@ Rails.application.routes.draw do
     end
     resources :posts, only: [:index]
   end
+  
+  resources :some, only: [:index, :show, :edit, :update, :destroy]
   
   resources :posts do
     resources :comments, only: [:create, :destroy]

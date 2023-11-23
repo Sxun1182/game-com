@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction, :image])
   end
   
+  def guest_user?
+    current_user && current_user.email == 'guest@example.com'
+  end
+  
 end

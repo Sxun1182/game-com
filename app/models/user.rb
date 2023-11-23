@@ -28,6 +28,13 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+    # 必要に応じて他の属性を設定
+    end
+  end
+  
   def following?(other_user)
     following.include?(other_user)
   end

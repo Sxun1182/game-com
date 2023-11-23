@@ -9,8 +9,8 @@
   <%= f.label :content, "内容" %>
   <%= f.text_area :content %>
   
-  <%= f.label :genre_ids, "ジャンルの選択" %>
-  <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name, include_hidden: false %>
+  <!--<%= f.label :genre_ids, "ジャンルの選択" %>
+  <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name, include_hidden: false %>-->
   
   <%= f.label :tags, 'タグ（カンマ区切り）' %>
   <%= f.text_field :tags, value: @post.tags.join(", ") %>
@@ -27,16 +27,16 @@
       <h3><%= link_to post.title, post_path(post) %></h3>
       <p>投稿者：<%= link_to post.user.name, user_path(post.user) %></p>
       <p>内容：<%= post.content %></p>
-      <p>ジャンル：
+      <!--<div>ジャンル：
         <% post.genres.each do |genre| %>
           <%= genre.name %>
         <% end %>
-      </p>
-      <p>タグ：
+      </div>-->
+      <div>タグ：
         <% post.tags.each do |tag| %>
           <%= tag.name %>
         <% end %>
-      </p>
+      </div>
       
       <% if !post.public && post.user == current_user %>
           <p>この投稿は非公開です。</p>

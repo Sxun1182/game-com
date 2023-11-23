@@ -1,5 +1,9 @@
 module Users
   class SessionsController < Devise::SessionsController
-    # ここにカスタムのアクションを追加できます
+    def guest_sign_in
+      user = User.guest
+      sign_in user
+      redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました。'
+    end
   end
 end
