@@ -1,12 +1,14 @@
-<%= button_to 'イベント', group_events_path(@group), method: :get %>
-<%= button_to 'メッセージ', group_path(@group), method: :get %>
-<%= button_to 'グループメンバー', group_members_path(@group), method: :get %>
+<div class="menu">
+  <%= button_to 'イベント', group_events_path(@group), method: :get, class: 'menu-button' %>
+  <%= button_to 'メッセージ', group_path(@group), method: :get, class: 'menu-button' %>
+  <%= button_to 'グループメンバー', group_members_path(@group), method: :get, class: 'menu-button' %>
+</div>
 
 <div class="member">
   <% if @group.owner.image.attached? %>
     <%= image_tag @group.owner.image, alt: @group.owner.name, size: "150x150" %>
   <% else %>
-    <p>no image</p>
+    <%= image_tag 'default.png', alt: 'default image', size: "150x150" %>
   <% end %>
   <h3><%= @group.owner.name %> (オーナー)</h3>
 </div>
@@ -16,8 +18,11 @@
     <% if group_user.user.image.attached? %>
       <%= image_tag group_user.user.image, alt: group_user.user.name, size: "150x150" %>
     <% else %>
-      <p>no image</p>
+      <%= image_tag 'default.png', alt: 'default image', size: "150x150" %>
     <% end %>
     <h3><%= group_user.user.name %></h3>
+    <% if @group.owner == current_user && group_user.user != current_user %>
+      <%= link_to '脱退させる', group_remove_member_path(@group, group_user.user), method: :delete, data: { confirm: "#{group_user.user.name}を本当に脱退させますか？" } %>
+    <% end %>
   </div>
 <% end %>

@@ -9,9 +9,8 @@
 
 <div class="site-login">
   <a href="/users/sign_in">ログインはこちら</a>
+  <%= button_to 'ゲストログイン', guest_sign_in_path, method: :post, class: 'site-login' %>
 </div>
-
-<%= button_to 'ゲストログイン', guest_sign_in_path, method: :post %>
 
 <div class="footer">
   <!-- 利用規約やプライバシーポリシーへのリンク、お問い合わせ情報など -->

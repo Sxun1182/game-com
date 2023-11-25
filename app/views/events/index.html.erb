@@ -1,6 +1,8 @@
-<%= button_to 'イベント', group_events_path(@group), method: :get %>
-<%= button_to 'メッセージ', group_path(@group), method: :get %>
-<%= button_to 'グループメンバー', group_members_path(@group), method: :get %>
+<div class="menu">
+  <%= button_to 'イベント', group_events_path(@group), method: :get, class: 'menu-button' %>
+  <%= button_to 'メッセージ', group_path(@group), method: :get, class: 'menu-button' %>
+  <%= button_to 'グループメンバー', group_members_path(@group), method: :get, class: 'menu-button' %>
+</div>
 
 <%= form_with(model: [ @group, Event.new ], local: true, html: { class: "event-form" }) do |f| %>
   <%= f.label :name, 'イベント名' %>

@@ -36,22 +36,16 @@ Rails.application.routes.draw do
   
   resources :groups do
     resources :members
-    resources :events
+    resources :events, only: [:create]
     resources :group_users, only: [:create]
     resources :messages, only: [:create]
+    delete 'remove_member/:user_id', to: 'groups#remove_member', as: 'remove_member'
   end
   
   resources :events
   
   resources :chats, only: [:create]
   resources :chat_rooms, only: [:index, :show]
-  
-  resources :groups do
-    resources :group_users, only: [:create]
-    resources :events, only: [:create]
-    resources :messages, only: [:create]
-  end
-  
   #root to: 'posts#index'
   
   get 'search', to: 'posts#search'

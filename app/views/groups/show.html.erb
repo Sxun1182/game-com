@@ -1,6 +1,8 @@
-<%= button_to 'イベント', group_events_path(@group), method: :get %>
-<%= button_to 'メッセージ', group_path(@group), method: :get %>
-<%= button_to 'グループメンバー', group_members_path(@group), method: :get %>
+<div class="menu">
+  <%= button_to 'イベント', group_events_path(@group), method: :get, class: 'menu-button' %>
+  <%= button_to 'メッセージ', group_path(@group), method: :get, class: 'menu-button' %>
+  <%= button_to 'グループメンバー', group_members_path(@group), method: :get, class: 'menu-button' %>
+</div>
 
 <div id="messages_<%= @group.id %>" class="messages">
   <% @group.messages.each do |message| %>

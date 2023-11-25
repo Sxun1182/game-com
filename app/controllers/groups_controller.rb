@@ -42,6 +42,17 @@ class GroupsController < ApplicationController
     redirect_to new_group_path, notice: 'グループを削除しました'
   end
   
+  def remove_member
+    group = Group.find(params[:group_id])
+    user = User.find(params[:user_id])
+    if group.owner == current_user
+      group.users.delete(user)
+      redirect_to group_members_path(group), notice: "#{user.name}をグループから脱退させました"
+    else
+      redirect_to group_path(group), alert: "権限がありません"
+    end
+  end
+  
   private
   
   def set_group

@@ -254,6 +254,19 @@
   margin: 20px 0;
 }
 
+input.guest-login {
+  display: block;
+  margin-top: 10px;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  text-decoration: underline;
+}
+
 .site-login a {
   background-color: #2c3e50;
   color: #ecf0f1;
@@ -304,11 +317,47 @@
   font-weight: bold;
 }
 
+.event {
+  background-color: #424242; /* ダークテーマのイベントボックスの背景色 */
+  border-radius: 10px; /* ボックスの角を丸くする */
+  margin: 20px auto; /* 上下に20pxのマージン、左右は自動 */
+  padding: 20px; /* ボックス内のパディング */
+  max-width: 600px; /* ボックスの最大幅 */
+}
+
+.event h3 {
+  font-size: 24px; /* イベント名のフォントサイズ */
+  margin-bottom: 10px; /* イベント名の下のマージン */
+}
+
+.event p {
+  font-size: 16px; /* イベント詳細のフォントサイズ */
+  line-height: 1.5; /* 行間 */
+}
+
 /* イベント作成フォーム */
 .event-form {
   background-color: #2c3e50;
   color: #ecf0f1;
   padding: 20px;
+}
+
+.member {
+  background-color: #424242; /* ダークテーマのメンバーボックスの背景色 */
+  border-radius: 10px; /* ボックスの角を丸くする */
+  margin: 20px auto; /* 上下に20pxのマージン、左右は自動 */
+  padding: 20px; /* ボックス内のパディング */
+  max-width: 600px; /* ボックスの最大幅 */
+  text-align: center; /* テキストを中央揃えにする */
+}
+
+.member img {
+  border-radius: 50%; /* 画像を円形にする */
+  margin-bottom: 10px; /* 画像と名前の間にマージンを設ける */
+}
+
+.member h3 {
+  font-size: 24px; /* メンバー名のフォントサイズ */
 }
 
 body {
@@ -344,4 +393,25 @@ button {
 
 button:hover {
   background-color: #018786; /* ホバー時のボタンの背景色 */
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+.menu-button {
+  background-color: #424242; /* ダークテーマのボタンの背景色 */
+  color: #ffffff; /* ボタンのテキストの色 */
+  border: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+  background-color: #616161; /* ホバー時のボタンの背景色 */
 }

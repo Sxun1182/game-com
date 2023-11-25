@@ -23,8 +23,8 @@
     <% else %>
       <%= form_with(model: [Chat.new], local: true) do |f| %>
         <%= f.hidden_field :receiver_id, value: @user.id %>
-        <%= f.text_area :message, placeholder: 'メッセージを入力...' %>
-        <%= f.submit 'DMを送る' %>
+        <!--<%= f.text_area :message, placeholder: 'メッセージを入力...' %>-->
+        <!--<%= f.submit 'DMを送る' %>-->
       <% end %>
     <% end %>
 
@@ -39,9 +39,9 @@
 
     <% unless current_user == @user %>
       <% if current_user.following?(@user) %>
-        <%= button_to 'Unfollow', unfollow_user_path(@user), method: :delete %>
+        <%= button_to 'フォローを外す', unfollow_user_path(@user), method: :delete %>
       <% else %>
-        <%= button_to 'Follow', follow_user_path(@user) %>
+        <%= button_to 'フォローする', follow_user_path(@user) %>
       <% end %>
     <% end %>
 
