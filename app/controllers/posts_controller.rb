@@ -24,14 +24,20 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
-    if post_params[:tags].present?
-      tags = post_params[:tags].split(',').map do |tag_name|
-        Tag.find_or_create_by(name: tag_name.strip)
+    # @post = current_user.posts.build(post_params)
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    @post_tag = PostTag.new
+    if params[:post][:tags].present?
+      params[:post][:tags].split(',').map do |tag_name|
+        @tag = Tag.find_or_create_by(name: tag_name.strip)
+        @post_tag.tag_id = @tag.id
       end
-      @post.tags = tags
+      # @post.tags = tags
     end
     if @post.save
+      @post_tag.post_id = @post.id
+      @post_tag.save
       redirect_to posts_path
     else
       render :new
@@ -75,7 +81,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :genre, tags: [], genre_ids: [])
+    params.require(:post).permit(:title, :content, :genre, :public)
   end
   
 end
