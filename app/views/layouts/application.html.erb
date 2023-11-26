@@ -11,7 +11,7 @@
     <%= javascript_pack_tag 'comments' %>
   </head>
   <body> 
-   <% unless (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'home' && action_name == 'index') %>
+   <% unless (controller_name == 'sessions' && action_name == 'new') || (controller_name == 'home' && action_name == 'index') || (controller_name == 'registrations' && action_name == 'new') %>
     <header class = "header">
       <div class  = "container">
         <div class = "header-left">
