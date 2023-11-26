@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :restrict_guest_user
 
   protected
   
@@ -19,6 +20,15 @@ class ApplicationController < ActionController::Base
   
   def guest_user?
     current_user && current_user.email == 'guest@example.com'
+  end
+  
+  private
+  
+  def restrict_guest_user
+     if current_user&.guest? && (request.path != posts_path) && (request.path != destroy_user_session_path)
+      sign_out current_user
+      redirect_to new_user_registration_path
+    end
   end
   
 end

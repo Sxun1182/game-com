@@ -35,6 +35,10 @@ class User < ApplicationRecord
     end
   end
   
+  def guest?
+    email == 'guest@example.com'
+  end
+  
   def following?(other_user)
     following.include?(other_user)
   end
