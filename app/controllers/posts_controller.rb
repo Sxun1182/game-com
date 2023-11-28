@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   end
   
   def search
-    @posts = Post.where('content LIKE ?', "%#{params[:keyword]}%")
+    @posts = params[:keyword].present? ? Post.where('content LIKE ?', "%#{params[:keyword]}%") : Post.all
   end
   
   def tag_search

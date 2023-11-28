@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   resources :groups do
     resources :members
     resources :events, only: [:create]
-    resources :group_users, only: [:create]
+    resources :group_users, only: [:create, :destroy]
     resources :messages, only: [:create]
     delete 'remove_member/:user_id', to: 'groups#remove_member', as: 'remove_member'
   end

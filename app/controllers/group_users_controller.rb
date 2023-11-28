@@ -17,6 +17,12 @@ def create
   end
 end
 
+def destroy
+  group_user = GroupUser.find_by(group_id: params[:group_id], user_id: current_user.id)
+  group_user.destroy if group_user
+  redirect_to new_group_path, notice: 'グループを脱退しました'
+end
+
 
 
 end

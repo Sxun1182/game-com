@@ -11,3 +11,16 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.addEventListener('turbolinks:load', function() {
+  var forms = document.querySelectorAll('form');
+  forms.forEach(function(form) {
+    form.onsubmit = function() {
+      var input = this.querySelector('input[type="text"]');
+      if (input.value === '') {
+        alert('検索欄が空です。何かキーワードを入力してください。');
+        return false;
+      }
+    };
+  });
+});

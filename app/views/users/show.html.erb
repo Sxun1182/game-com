@@ -13,7 +13,9 @@
     <% end %>
 
     <p>名前: <%= @user.name %></p>
-    <p>メールアドレス: <%= @user.email %></p>
+    <% if current_user.admin? || current_user == @user %>
+      <p>メールアドレス: <%= @user.email %></p>
+    <% end %>
     <p>自己紹介: <%= @user.introduction %></p>
 
     <% if @user == current_user %>

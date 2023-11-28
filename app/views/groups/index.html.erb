@@ -1,9 +1,16 @@
-<% @groups.each do |group| %>
-  <div>
-    <h2><%= group.name %></h2>
-    <p><%= group.purpose %></p>
-    <% unless group.owner == current_user || current_user.groups.include?(group) %>
-      <%= button_to 'グループに参加', group_group_users_path(group), method: :post %>
-    <% end %>
-  </div>
-<% end %>
+<h2 class="group-list-title">グループ一覧</h2>
+
+<div class="group-list">
+  <% @groups.each do |group| %>
+    <div class="group-items-container">
+      <h2 class="group-item-title"><%= group.name %></h2>
+      <div class="group-item-purpose"><%= group.purpose %></div>
+      <% if group.owner == current_user || current_user.admin? %>
+        <%= link_to 'グループを削除', group, method: :delete, data: { confirm: '本当によろしいですか？' }, class: "group-delete-btn" %>
+      <% end %>
+      <% unless group.owner == current_user || current_user.groups.include?(group) %>
+        <%= button_to 'グループに参加', group_group_users_path(group), method: :post, class: "group-join-btn" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

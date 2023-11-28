@@ -1,34 +1,69 @@
-<h1>検索結果</h1>
-<% @posts.each do |post| %>
-  <div>
-    <h2>タイトル: <%= post.title %></h2>
-    <p>名前: <%= link_to post.user.name, user_path(post.user) %></p>
-    <p>内容: <%= post.content %></p>
-    <p>ジャンル: 
-      <% post.genres.each do |genre| %>
-        <%= genre.name %>
+<body class="home-index">
+<div class="posts-index">
+  <h2>検索結果</h2>
+  
+  <% if @posts.empty? %>
+    <p>検索結果はありません。</p>
+  <% @posts.each do |post| %>
+   <% if post.public || post.user == current_user %>
+    <div class="post">
+      <h3><%= link_to post.title, post_path(post) %></h3>
+      <p>投稿者：<%= link_to post.user.name, user_path(post.user) %></p>
+      <p>内容：<%= post.content %></p>
+      <!--<div>ジャンル：
+        <% post.genres.each do |genre| %>
+          <%= genre.name %>
+        <% end %>
+      </div>-->
+      <div>タグ：
+        <% post.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %>
+      </div>
+      
+      <% if !post.public && post.user == current_user %>
+          <p>この投稿は非公開です。</p>
       <% end %>
-    </p>
-    <p>タグ: 
-      <% post.tags.each do |tag| %>
-        <%= tag.name %>
+      
+      <% if post.user == current_user || current_user.admin? %>
+        <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
       <% end %>
-    </p>
-    
-    <% if post.user == current_user || current_user.admin? %>
-      <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      
+      <% if post.likes.find_by(user_id: current_user.id) %>
+        <%= link_to 'いいねを取り消す', post_likes_path(post), method: :delete %>
+      <% else %>
+        <%= link_to 'いいね', post_likes_path(post), method: :post %>
+      <% end %>
+      
+      <p>いいね数：<%= post.likes.count %></p>
+      
+      <% post.comments.first(3).each do |comment| %>
+        <p class="comment"><%= comment.user.name %>：<%= comment.content %></p>
+        <% if comment.user == current_user || post.user == current_user || current_user.admin? %>
+          <%= link_to 'コメントを削除', post_comment_path(post, comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        <% end %>
+      <% end %>
+
+      <% if post.comments.count > 3 %>
+        <div class="hidden_comments" style="display: none;">
+          <% post.comments.drop(3).each do |comment| %>
+            <p class="comment"><%= comment.user.name %>：<%= comment.content %></p>
+          <% end %>
+        </div>
+        <button class="show_comments">その他のコメント</button>
+      <% end %>
+      
+      <div id="comments_<%= post.id %>"></div>
+      <%= form_with(model: [post, Comment.new], local: false) do |f| %>
+        <%= f.text_area :content, placeholder: 'コメントを入力...' %>
+        <%= f.submit 'コメントする' %>
+      <% end %>
+      
+      
+    </div>
     <% end %>
-    
-    <% if post.likes.find_by(user_id: current_user.id) %>
-      <%= link_to 'いいねを取り消す', post_likes_path(post), method: :delete %>
-    <% else %>
-      <%= link_to 'いいね', post_likes_path(post), method: :post %>
-    <% end %>
-    
-    <p>いいね数: <%= post.likes.count %></p>
-    <%= form_with(model: [post, Comment.new], local: true) do |f| %>
-      <%= f.text_area :content, placeholder: 'コメントを入力...' %>
-      <%= f.submit 'コメントする' %>
-    <% end %>
-  </div>
-<% end %>
+  <% end %>
+  <% end %>
+</div>
+
+</body>

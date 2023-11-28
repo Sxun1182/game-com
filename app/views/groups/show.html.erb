@@ -2,6 +2,9 @@
   <%= button_to 'イベント', group_events_path(@group), method: :get, class: 'menu-button' %>
   <%= button_to 'メッセージ', group_path(@group), method: :get, class: 'menu-button' %>
   <%= button_to 'グループメンバー', group_members_path(@group), method: :get, class: 'menu-button' %>
+  <% if @group.group_users.find_by(user_id: current_user.id) %>
+    <%= button_to 'グループを脱退', group_group_user_path(@group, current_user), method: :delete, data: { confirm: '本当に脱退しますか？' } %>
+  <% end %>
 </div>
 
 <div id="messages_<%= @group.id %>" class="messages">

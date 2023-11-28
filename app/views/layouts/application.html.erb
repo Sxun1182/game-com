@@ -15,7 +15,7 @@
     <header class = "header">
       <div class  = "container">
         <div class = "header-left">
-          <h1><a href="/">OriginalApp</a></h1>
+          <h2><a href="/">君の広場</a></h2>
           <!-- ゲームのアイコン -->
           <i class="fas fa-gamepad"></i>
         </div>
@@ -33,7 +33,13 @@
           <%= f.text_field :tags %>
           <%= f.submit "検索" %>
         <% end %>
-    
+        
+        <%= form_with url: "/groups", method: :get, local: true do |f| %>
+          <%= f.label :search, "グループ検索（キーワード）" %>
+          <%= f.text_field :search %>
+          <%= f.submit "検索" %>
+        <% end %>
+        
         <!--<%= form_with(url: posts_path, method: :get, local: true) do |form| %>-->
           <!--<%= form.label :genre_id, 'ジャンルで検索' %>-->
           <!--<%= form.collection_select :genre_id, Genre.all, :id, :name %>-->

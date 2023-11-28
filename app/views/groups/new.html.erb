@@ -16,13 +16,13 @@
   <% end %>
 </div>
 
-<div class="group-list">
-  <h2 class="group-list-title">グループ一覧</h2>
+<h2 class="group-list-title">グループ一覧</h2>
 
+<div class="group-list">
   <% @groups.each do |group| %>
-    <div class="group-item">
-      <h3 class="group-item-title"><%= group.name %></h3>
-      <p class="group-item-purpose"><%= group.purpose %></p>
+    <div class="group-items-container">
+      <h2 class="group-item-title"><%= group.name %></h2>
+      <div class="group-item-purpose"><%= group.purpose %></div>
       <% if group.owner == current_user || current_user.admin? %>
         <%= link_to 'グループを削除', group, method: :delete, data: { confirm: '本当によろしいですか？' }, class: "group-delete-btn" %>
       <% end %>
@@ -32,3 +32,5 @@
     </div>
   <% end %>
 </div>
+
+

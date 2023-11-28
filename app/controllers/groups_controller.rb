@@ -4,7 +4,11 @@ class GroupsController < ApplicationController
   before_action :check_owner, only: [:edit, :update, :destroy]
   
   def index
-    @groups = Group.all
+    if params[:search].present?
+      @groups = Group.search(params[:search])
+    else
+      @groups = Group.none
+    end
   end
   
   def show
@@ -13,7 +17,7 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-    @groups = Group.all
+    @groups = params[:search].present? ? Group.search(params[:search]) : Group.all
   end
 
   def create
