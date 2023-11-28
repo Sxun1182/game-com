@@ -10,7 +10,7 @@
   <% else %>
     <%= image_tag 'default.png', alt: 'default image', size: "150x150" %>
   <% end %>
-  <h3><%= @group.owner.name %> (オーナー)</h3>
+  <h3><%= link_to @group.owner.name, user_path(@group.owner) %> (オーナー)</h3>
 </div>
 
 <% @group_users.each do |group_user| %>
@@ -20,7 +20,7 @@
     <% else %>
       <%= image_tag 'default.png', alt: 'default image', size: "150x150" %>
     <% end %>
-    <h3><%= group_user.user.name %></h3>
+    <h3><%= link_to group_user.user.name, user_path(group_user.user) %></h3>
     <% if @group.owner == current_user && group_user.user != current_user %>
       <%= link_to '脱退させる', group_remove_member_path(@group, group_user.user), method: :delete, data: { confirm: "#{group_user.user.name}を本当に脱退させますか？" } %>
     <% end %>
