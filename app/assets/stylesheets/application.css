@@ -442,3 +442,57 @@ button:hover {
 .wrapper div {
   width: 33%;
 }
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.profile-edit-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #242424;
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #121212;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00ff00;
+  color: #121212;
+  cursor: pointer;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #ffffff;
+}
