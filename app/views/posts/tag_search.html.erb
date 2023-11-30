@@ -1,6 +1,9 @@
 <div class="posts-index">
   <h2>投稿一覧（タグ検索結果）</h2>
   
+  <% if @posts.empty? %>
+    <p>検索結果はありません。</p>
+  <% else %>
 <% @posts.each do |post| %>
    <% if post.public || post.user == current_user %>
     <div class="post">
@@ -58,6 +61,8 @@
       
       
     </div>
+     
     <% end %>
+   <% end %>
   <% end %>
 </div>

@@ -6,8 +6,12 @@ class GroupsController < ApplicationController
   def index
     if params[:search].present?
       @groups = Group.search(params[:search])
+      if @groups.empty?
+        flash[:alert] = '検索結果はありません。'
+      end
     else
       @groups = Group.none
+      flash[:alert] = '検索欄が空です。何かキーワードを入力してください。'
     end
   end
   

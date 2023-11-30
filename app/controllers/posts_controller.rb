@@ -60,16 +60,21 @@ class PostsController < ApplicationController
   end
   
   def search
-    @posts = params[:keyword].present? ? Post.where('content LIKE ?', "%#{params[:keyword]}%") : Post.all
+    if params[:keyword].present?
+      @posts = Post.where('content LIKE ?', "%#{params[:keyword]}%")
+    else
+      @posts = []
+      flash[:alert] = '検索欄が空です。何かキーワードを入力してください。'
+    end
   end
   
   def tag_search
-    @posts = Post.joins(:tags).where(tags: { name: params[:tags].split(',') })
-  end
-  
-  def genre_search
-    @posts = Post.where(genre: params[:genre])
-    render :index
+    if params[:tags].present?
+      @posts = Post.joins(:tags).where(tags: { name: params[:tags].split(',') })
+    else
+      @posts = []
+      flash[:alert] = '検索欄が空です。何かキーワードを入力してください。'
+    end
   end
   
   def destroy

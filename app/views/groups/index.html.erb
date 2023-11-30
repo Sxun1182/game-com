@@ -1,6 +1,10 @@
-<h2 class="group-list-title">グループ一覧</h2>
+<div class="posts-index">
+  <h2>検索結果</h2>
 
 <div class="group-list">
+  <% if @groups.empty? %>
+    <p>検索結果はありません</p>
+  <% else %>
   <% @groups.each do |group| %>
     <div class="group-items-container">
       <h2 class="group-item-title"><%= group.name %></h2>
@@ -13,4 +17,6 @@
       <% end %>
     </div>
   <% end %>
+  <% end %>
+</div>
 </div>
