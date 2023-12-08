@@ -293,46 +293,67 @@ input.guest-login {
   border-radius: 5px;
 }
 
-/* メッセージフォーム */
-.message-form {
-  background-color: #3c5062; /* フォームの背景色を少し明るくします */
-  color: #ecf0f1;
-  padding: 20px;
-  margin-top: 20px; /* 上部のマージンを20pxに設定 */
+/* チャットルーム全体のスタイリング */
+.chat-room {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f7f7f7;
 }
 
-.message-form textarea {
-  background-color: #ffffff; /* テキストエリアの背景色を白にします */
-  color: #000000; /* テキストエリアのテキスト色を黒にします */
-  height: 100px;
-  width: 300px;
-}
-
-.message-form input[type="submit"] {
-  background-color: #27ae60; /* 送信ボタンの背景色を緑にします */
-  color: #ffffff; /* 送信ボタンのテキスト色を白にします */
-  border: none; /* 送信ボタンのボーダーを削除します */
-  padding: 10px 20px; /* 送信ボタンのパディングを追加します */
-  cursor: pointer; /* 送信ボタンのカーソルをポインターにします */
-}
-
-/* メッセージエリア */
+/* メッセージエリアのスタイリング */
 .messages {
-  background-color: #ffffff;
-  color: #000000;
+  flex: 1;
+  overflow-y: auto;
   padding: 20px;
-  margin: 20px 0;
+  background: #333;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: #fff;
 }
 
-.messages p {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* 各メッセージのスタイリング */
+.message {
   padding: 10px;
   margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #555;
+  color: #fff;
 }
 
-.messages p strong {
-  font-weight: bold;
+/* 自分のメッセージのスタイリング */
+.message-self {
+  background-color: #007bff; /* 明るい青色の背景色 */
+  color: #fff; /* 白色のテキスト */
+}
+
+/* メッセージフォームのスタイリング */
+.message-form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.message-textarea {
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  resize: none;
+}
+
+.message-submit {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+.message-submit:hover {
+  background-color: #218838; /* ホバー時の濃い緑色 */
 }
 
 .event {

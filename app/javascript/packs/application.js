@@ -26,3 +26,13 @@ document.addEventListener('turbolinks:load', function() {
     };
   });
 });
+
+document.addEventListener('turbolinks:load', () => {
+  const messageForm = document.querySelector('.message-form');
+  if (messageForm) {
+    messageForm.addEventListener('ajax:success', () => {
+      const textArea = messageForm.querySelector('.message-textarea');
+      textArea.value = ''; // テキストエリアをクリア
+    });
+  }
+});

@@ -7,15 +7,17 @@
   <% end %>
 </div>
 
-<div id="messages_<%= @group.id %>" class="messages">
-  <% @group.messages.each do |message| %>
-    <p><strong><%= message.user.name %></strong>：<%= message.content %></p>
-  <% end %>
-</div>
-
+<div class="chat-room">
+  <div id="messages_<%= @group.id %>" class="messages">
+    <% @group.messages.each do |message| %>
+      <div class="message<%= ' message-self' if message.user == current_user %>">
+        <strong><%= message.user.name %></strong>：<%= message.content %>
+      </div>
+    <% end %>
+  </div>
 
   <%= form_with(model: [ @group, Message.new ], url: group_messages_path(@group), local: false, html: { class: "message-form" }) do |f| %>
-    <%= f.label :content, 'メッセージ' %>
-    <%= f.text_area :content, class: "message-textarea" %>
+    <%= f.text_area :content, class: "message-textarea", placeholder: 'メッセージを入力...' %>
     <%= f.submit '送信', class: "message-submit" %>
   <% end %>
+</div>
