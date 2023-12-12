@@ -9,9 +9,14 @@ Rails.application.routes.draw do
     post 'guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
   
-  namespace :admin do
-    resources :genres, only: [:index, :new, :create]
+  authenticate :user, lambda { |u| u.admin? } do
+    namespace :admin do
+      resources :genres, only: [:index, :new, :create, :destroy]
+    end
   end
+  
+  get '/admin', to: redirect('/')
+  get '/admin/*path', to: redirect('/')
   
   resources :users, only: [:show] do
     member do
