@@ -26,7 +26,7 @@
   <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name, include_hidden: false %>-->
   
   <%= f.label :tags, 'タグ（カンマ区切り）' %>
-  <%= f.text_field :tags, value: @post.tags.join(", ") %>
+  <%= f.text_field :tags, name: 'post[tags]', value: @post.tags.map(&:name).join(", ") %>
   
   <%= f.label :public, '公開設定' %>
   <%= f.select :public, [['公開', true], ['非公開', false]] %>

@@ -25,14 +25,13 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-  
+
+    # カンマ区切りの文字列から配列に変換し、Tagモデルのインスタンスを見つけるか新しく作成する
+    tag_names = params[:post][:tags].split(',').map(&:strip)
+    tags = tag_names.map { |name| Tag.find_or_create_by(name: name) }
+    @post.tags = tags
+
     if @post.save
-      if params[:post][:tags].present?
-        params[:post][:tags].split(',').each do |tag_name|
-          tag = Tag.find_or_create_by(name: tag_name.strip)
-         PostTag.create(post_id: @post.id, tag_id: tag.id)
-        end
-      end
       redirect_to posts_path
     else
       @posts = Post.all
@@ -42,13 +41,9 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
-    if post_params[:tags].present?
-      tags = post_params[:tags].split(',').map do |tag_name|
-        Tag.find_or_create_by(name: tag_name.strip)
-      end
-      @post.tags = tags
-    end
+  
     if @post.update(post_params.except(:tags))
+      assign_tags(@post, post_params[:tags])
       redirect_to post_path(@post)
     else
       render :edit
@@ -81,6 +76,15 @@ class PostsController < ApplicationController
 
   private
 
+  def assign_tags(post, tag_names)
+    post.tags.clear # 既存のタグをクリア
+    tag_names.each do |tag_name|
+      # 文字列からTagモデルのインスタンスを見つけるか、新しく作成する
+      tag = Tag.find_or_create_by(name: tag_name)
+      post.tags << tag
+    end
+  end
+  
   def post_params
     params.require(:post).permit(:title, :content, :public)
   end
